@@ -1,0 +1,151 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background: linear-gradient(135deg, #a0eec0 0%, #ffe8a3 100%);
+    color: #333;
+}
+
+img {
+    width: 50vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+}
+
+#login {
+    width: 50vw;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    color: #333;
+}
+
+#login h1 {
+    font-size: 3.5rem;
+    color: #FFA07A; 
+    margin-bottom: 1rem;
+}
+
+#login p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #555;
+}
+
+.input-container {
+    margin-bottom: 1.5rem;
+}
+
+.input-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #fff;
+    font-size: 1rem;
+    transition: border 0.3s ease;
+}
+
+.input-container input:focus {
+    border-color: #FF7F50;
+    outline: none;
+}
+
+button {
+    padding: 0.8rem 1.5rem;
+    background-color: #40E0D0; 
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+}
+
+button:hover {
+    background-color: #30cfc0;
+}
+
+form p {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+form a {
+    color: #FFA07A;
+    text-decoration: none;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    img {
+        width: 100vw;
+        height: 40vh;
+    }
+
+    .signup,
+    #login {
+        width: 100vw;
+        padding: 2rem 1.5rem;
+        text-align: center;
+    }
+
+    .signup h1,
+    #login h1 {
+        font-size: 2.5rem;
+    }
+
+    .signup p,
+    #login p {
+        font-size: 1rem;
+    }
+
+    .input-container {
+        text-align: left;
+    }
+
+    .input-container label {
+        font-size: 0.95rem;
+    }
+
+    .input-container input {
+        font-size: 1rem;
+        padding: 0.7rem 1rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 0.7rem;
+        width: 100%;
+    }
+
+    form p {
+        font-size: 0.9rem;
+    }
+}
