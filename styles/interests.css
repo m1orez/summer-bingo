@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #fff1e6 0%, #c7f9cc 100%);
+    color: #333;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #ff8ba7;
+}
+
+p {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.interest-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.interestCard {
+    background-color: #fff9f0;
+    padding: 1rem 1.5rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.interestCard h2 {
+    font-size: 1.1rem;
+    color: #344e41;
+    gap: 0.5rem;
+    margin: 0;
+}
+
+.interestCard img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.interestCard p {
+    font-size: 0.9rem;
+    color: #555;
+    text-align: left;
+}
+
+.interestCard:hover {
+    background: linear-gradient(135deg, #fefae0, #faedcd);
+    border-color: #f4a261;
+    box-shadow: 0 6px 12px rgba(244, 162, 97, 0.15);
+    transform: translateY(-3px);
+}
+.interestCard.selected {
+    background: linear-gradient(135deg, #ffffff, #ffdae1);
+    border-color: #519ce7;
+    box-shadow: 0 8px 16px rgba(231, 111, 81, 0.25);
+    transform: scale(1.02);
+}
+
+button {
+    display: block;
+    margin: 2rem auto;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    background: linear-gradient(135deg, #ffafcc, #cdb4db);
+    border: none;
+    border-radius: 2rem;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #cdb4db, #ffafcc);
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+@media (max-width: 600px) {
+    .interest-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .interestCard {
+        padding: 1rem;
+        border-radius: 1.5rem;
+    }
+
+    .interestCard h2 {
+        font-size: 1rem;
+    }
+
+    .interestCard p {
+        font-size: 0.85rem;
+    }
+
+    .interestCard img {
+        width: 20px;
+        height: 20px;
+    }
+}
