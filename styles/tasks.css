@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #FAE3D9, #BBDED6);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  color: #333;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #61C0BF;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+nav > a {
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+nav div {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+nav div a {
+  color: #ffffff;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+#seashells {
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #ffffff;
+  color: #61C0BF;
+  padding: 0.4rem 1rem;
+  border-radius: 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #4BBCF4;
+  margin-bottom: 1.5rem;
+}
+
+.taskContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: #ffffff;
+  border-left: 6px solid #FFB6B9;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.taskContainer:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(75, 188, 244, 0.15);
+}
+
+.taskContainer h1 {
+  font-size: 1.4rem;
+  color: #61C0BF;
+}
+
+.taskContainer p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.taskContainer button,
+.taskContainer a[href*="taskProof.html"] {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 2rem;
+  background-color: #FFB6B9;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.taskContainer button:hover,
+.taskContainer a[href*="taskProof.html"]:hover {
+  background-color: #FAD4C0;
+  color: #333;
+}
+
+@media (min-width: 768px) {
+  .taskContainer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .taskContainer h1 {
+    flex: 1;
+    font-size: 1.5rem;
+  }
+
+  .taskContainer p {
+    flex: 2;
+    margin: 0;
+  }
+
+  .taskContainer button,
+  .taskContainer a[href*="taskProof.html"] {
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .taskContainer {
+    padding: 1rem;
+  }
+
+  .taskContainer h1 {
+    font-size: 1.2rem;
+  }
+
+  .taskContainer p {
+    font-size: 0.9rem;
+  }
+
+  .taskContainer button,
+  .taskContainer a[href*="taskProof.html"] {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+}
