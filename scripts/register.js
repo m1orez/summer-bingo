@@ -11,6 +11,11 @@ import {
 
 const registerForm = document.getElementById("registerForm");
 
+window.addEventListener('load', () => {
+  const form = document.getElementById('loginForm');
+  if (form) form.reset();
+});
+
 registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 

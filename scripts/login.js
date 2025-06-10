@@ -14,7 +14,11 @@ import {
   getDoc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// Firebase config
+window.addEventListener('load', () => {
+  const form = document.getElementById('loginForm');
+  if (form) form.reset();
+});
+
 const firebaseConfig = {
   apiKey: "AIzaSyB4qMrwLBSIZXQHUN4vXYMnOxp5Iq9R_cU",
   authDomain: "summer-bingo.firebaseapp.com",
@@ -79,3 +83,5 @@ forgotPasswordLink.addEventListener("click", async () => {
     alert("Error: " + err.message);
   }
 });
+
+
