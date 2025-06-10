@@ -46,7 +46,8 @@ registerForm.addEventListener("submit", async (e) => {
       seashells: 50,
       interests: [],
       tasksCompleted: [],
-      currentTasks: []
+      currentTasks: [],
+      skippedTasks: []
     });
 
     await sendEmailVerification(user);

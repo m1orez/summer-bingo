@@ -1,0 +1,77 @@
+{
+    "alcohol": [
+      {
+        "name": "Three pints challenge",
+        "description": "Go to a pub/bar and drink 3 pints/cocktails within an hour",
+        "points": 0
+      },
+      {
+        "name": "Taste your poison",
+        "description": "Attend a wine, beer or whisky tasting",
+        "points": 0
+      },
+      {
+        "name": "Crawl home challenge",
+        "description": "Go on a pub or bar crawl with at least six locations",
+        "points": 0
+      },
+      {
+        "name": "Spirited night",
+        "description": "Have a shot of at least five unique spirits in one night",
+        "points": 0
+      },
+      {
+        "name": "Alphabetic drinker",
+        "description": "Have a drink for 5 consecutive letters of the alphabet (Aperol spritz, Buck's fizz, etc.)",
+        "points": 0
+      },
+      {
+        "name": "Power hour",
+        "description": "Drink a shot of beer every minute for an hour",
+        "points": 0
+      },
+      {
+        "name": "Brewery visit",
+        "description": "Visit a brewery or a distillery",
+        "points": 0
+      },
+      {
+        "name": "Pinterest warrior",
+        "description": "Make a cocktail from Pinterest and see if it tastes as good as it looks",
+        "points": 0
+      },
+      {
+        "name": "split the G'",
+        "description": "Order a Guinness and 'split the G' first try",
+        "points": 0
+      },
+      {
+        "name": "Alcohol-free, TWICE",
+        "description": "Drink every drink mentioned in 'Alcohol-Free' by TWICE in one night (champagne, wine, tequila, margarita, mojito, mimosa and piña colada)",
+        "points": 0
+      },
+      {
+        "name": "wakey wakey, time for a shot",
+        "description": "Get drunk before noon on a weekday",
+        "points": 0
+      }
+    ],
+    "outdoors": [
+      {
+       "name": "",
+       "description": "",
+       "points": 0
+      },
+      {
+        "name": "",
+        "description": "",
+        "points": 0
+       },
+       {
+        "name": "",
+        "description": "",
+        "points": 0
+       },
+    ]
+  }
+  
