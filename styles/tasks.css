@@ -14,49 +14,6 @@ body {
   color: #333;
 }
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #61C0BF;
-  padding: 1rem 2rem;
-  border-radius: 1rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-nav > a {
-  color: #ffffff;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 1.5rem;
-}
-
-nav div {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-nav div a {
-  color: #ffffff;
-  font-weight: 500;
-  text-decoration: none;
-  font-size: 1rem;
-}
-
-#seashells {
-  font-size: 1rem;
-  font-weight: 600;
-  background-color: #ffffff;
-  color: #61C0BF;
-  padding: 0.4rem 1rem;
-  border-radius: 1rem;
-}
-
 h1 {
   font-size: 2rem;
   color: #4BBCF4;
