@@ -10,6 +10,10 @@ nav {
     gap: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
+
+  #active {
+    border-bottom: 1.5px solid #ffffff;
+  }
   
   nav > a {
     color: #ffffff;
@@ -39,6 +43,16 @@ nav {
     color: #61C0BF;
     padding: 0.4rem 1rem;
     border-radius: 1rem;
+  }
+
+  #logoutBtn {
+    background-color: #61C0BF;
+    border: none;
+  }
+
+  #logoutBtn:hover {
+    cursor: pointer;
+    color: red;
   }
 
   @media (max-width: 480px) {
