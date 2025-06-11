@@ -1,6 +1,8 @@
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { auth, db } from "./firebaseConfig.js";
+
+let currentTasks = [];
 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
@@ -9,8 +11,16 @@ onAuthStateChanged(auth, async (user) => {
 
     if (userSnap.exists()) {
       const userData = userSnap.data();
+
       if (!userData.interests || userData.interests.length === 0) {
         showInterestPopup();
+      } else {
+        if (userData.currentTasks && userData.currentTasks.length > 0) {
+          currentTasks = userData.currentTasks;
+        } else {
+          currentTasks = await generateAndSaveTasks(userRef, userData.interests);
+        }
+        renderTasks(currentTasks);
       }
     }
   } else {
@@ -18,45 +28,50 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-function showInterestPopup() {
-  const popup = document.createElement("div");
-  popup.style.position = "fixed";
-  popup.style.top = "0";
-  popup.style.left = "0";
-  popup.style.width = "100%";
-  popup.style.height = "100%";
-  popup.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
-  popup.style.display = "flex";
-  popup.style.alignItems = "center";
-  popup.style.justifyContent = "center";
-  popup.style.zIndex = "9999";
+async function generateAndSaveTasks(userRef, interests) {
+  const response = await fetch("../tasks.json");  
+  const allTasks = await response.json();
 
-  popup.innerHTML = `
-    <div style="
-      background: white;
-      padding: 2rem;
-      border-radius: 8px;
-      text-align: center;
-      max-width: 400px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    ">
-      <h2>Interests Missing</h2>
-      <p>It looks like you haven't selected your interests yet.</p>
-      <button id="goToInterests" style="
-        margin-top: 1rem;
-        padding: 0.5rem 1rem;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      ">Choose Interests</button>
-    </div>
-  `;
+  let pool = [];
 
-  document.body.appendChild(popup);
+  interests.forEach((interest) => {
+    if (allTasks[interest]) {
+      pool = pool.concat(allTasks[interest]);
+    }
+  });
 
-  document.getElementById("goToInterests").addEventListener("click", () => {
-    window.location.href = "./pickInterests.html";
+  const selected = shuffleArray(pool).slice(0, 10);
+  await updateDoc(userRef, { currentTasks: selected });
+  return selected;
+}
+
+function shuffleArray(array) {
+  return array
+    .map(value => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value);
+}
+
+function renderTasks(tasks) {
+  const wrapper = document.querySelector(".tasks-wrapper");
+  wrapper.innerHTML = "";
+
+  tasks.forEach((task, i) => {
+    const container = document.createElement("div");
+    container.className = "taskContainer";
+    container.id = `task${i + 1}`;
+
+    container.innerHTML = `
+      <div class="task-info">
+        <h2>${task.name || "Untitled Task"}</h2>
+        <p>${task.description || "No description available."}</p>
+      </div>
+      <div class="task-actions">
+        <a href="./rerollTask.html?taskIndex=${i}" class="reroll-btn">Reroll task</a>
+        <a href="./taskProof.html?taskIndex=${i}" class="proof-btn">Submit proof</a>
+      </div>
+    `;
+
+    wrapper.appendChild(container);
   });
 }

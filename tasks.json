@@ -1,77 +1,541 @@
 {
     "alcohol": [
-      {
-        "name": "Three pints challenge",
-        "description": "Go to a pub/bar and drink 3 pints/cocktails within an hour",
-        "points": 0
-      },
-      {
-        "name": "Taste your poison",
-        "description": "Attend a wine, beer or whisky tasting",
-        "points": 0
-      },
-      {
-        "name": "Crawl home challenge",
-        "description": "Go on a pub or bar crawl with at least six locations",
-        "points": 0
-      },
-      {
-        "name": "Spirited night",
-        "description": "Have a shot of at least five unique spirits in one night",
-        "points": 0
-      },
-      {
-        "name": "Alphabetic drinker",
-        "description": "Have a drink for 5 consecutive letters of the alphabet (Aperol spritz, Buck's fizz, etc.)",
-        "points": 0
-      },
-      {
-        "name": "Power hour",
-        "description": "Drink a shot of beer every minute for an hour",
-        "points": 0
-      },
-      {
-        "name": "Brewery visit",
-        "description": "Visit a brewery or a distillery",
-        "points": 0
-      },
-      {
-        "name": "Pinterest warrior",
-        "description": "Make a cocktail from Pinterest and see if it tastes as good as it looks",
-        "points": 0
-      },
-      {
-        "name": "split the G'",
-        "description": "Order a Guinness and 'split the G' first try",
-        "points": 0
-      },
-      {
-        "name": "Alcohol-free, TWICE",
-        "description": "Drink every drink mentioned in 'Alcohol-Free' by TWICE in one night (champagne, wine, tequila, margarita, mojito, mimosa and piña colada)",
-        "points": 0
-      },
-      {
-        "name": "wakey wakey, time for a shot",
-        "description": "Get drunk before noon on a weekday",
-        "points": 0
-      }
+        {
+            "name": "The Holy Trinity",
+            "description": "Go to a pub/bar and drink three pints/cocktails within an hour",
+            "points": 0
+        },
+        {
+            "name": "Taste your poison",
+            "description": "Attend a wine, beer or whisky tasting",
+            "points": 0
+        },
+        {
+            "name": "You'll be crawling too by the end",
+            "description": "Go on a pub or bar crawl with at least six locations",
+            "points": 0
+        },
+        {
+            "name": "Indecisive",
+            "description": "Have a shot of at least five unique spirits in one night",
+            "points": 0
+        },
+        {
+            "name": "You might not be able to spell after this",
+            "description": "Have a drink for each letter of the alphabet (Aperol spritz, Buck's fizz, etc.)",
+            "points": 0
+        },
+        {
+            "name": "And try not to drunk text your ex",
+            "description": "Have a power hour (a shot of beer/cider per min. for 60 mins)",
+            "points": 0
+        },
+        {
+            "name": "Alcoholic manoeuvres",
+            "description": "Visit a brewery or a distillery",
+            "points": 0
+        },
+        {
+            "name": "It probably won't",
+            "description": "Make a cocktail from Pinterest and see if it tastes as good as it looks",
+            "points": 0
+        },
+        {
+            "name": "If it's over £5.50 the glass is included",
+            "description": "Order a Guiness and 'split the G' first try",
+            "points": 0
+        },
+        {
+            "name": "I'm drunk in you",
+            "description": "Drink every drink mentioned in 'Alcohol-Free' by TWICE in one night",
+            "points": 0
+        },
+        {
+            "name": "What are you doing with your life",
+            "description": "Get drunk before noon on a weekday",
+            "points": 0
+        }
     ],
     "outdoors": [
-      {
-       "name": "",
-       "description": "",
-       "points": 0
-      },
-      {
-        "name": "",
-        "description": "",
-        "points": 0
-       },
-       {
-        "name": "",
-        "description": "",
-        "points": 0
-       },
+        {
+            "name": "she a runner, she a track star",
+            "description": "Run a 5K",
+            "points": 0
+        },
+        {
+            "name": "Sore feet challenge",
+            "description": "Get in at least 25,000 steps in a single day",
+            "points": 0
+        },
+        {
+            "name": "Scenic sunrise",
+            "description": "Watch the sunrise or sunset somewhere scenic",
+            "points": 0
+        },
+        {
+            "name": "Exploration adventures",
+            "description": "Visit to a town you've never been to before",
+            "points": 0
+        },
+        {
+            "name": "Stargazing",
+            "description": "Go stargazing",
+            "points": 0
+        },
+        {
+            "name": "Watersports",
+            "description": "Try a water sport (kayaking, paddleboarding, etc.)",
+            "points": 0
+        },
+        {
+            "name": "Fruitpicking",
+            "description": "Head to your local farm and go fruitpicking",
+            "points": 0
+        },
+        {
+            "name": "Haunted?",
+            "description": "Explore an abandoned building (stay safe)",
+            "points": 0
+        },
+        {
+            "name": "Caching in",
+            "description": "Start geocaching and find your first cache",
+            "points": 0
+        },
+        {
+            "name": "GO, GO, GO",
+            "description": "Catch a shiny Pokémon in Pokémon GO!",
+            "points": 0
+        },
+        {
+            "name": "Botanic garden",
+            "description": "Visit a botanical garden",
+            "points": 0
+        },
+        {
+            "name": "",
+            "description": "",
+            "points": 0
+        }
+    ],
+    "silly": [
+        {
+            "name": "Boomer scamming",
+            "description": "Get an item worth at least £20/$25 completely free from Facebook Marketplace",
+            "points": 0
+        },
+        {
+            "name": "You might regret this",
+            "description": "Sing your favourite song at a karaoke event",
+            "points": 0
+        }
+    ],
+    "indoors": [
+        {
+            "name": "Good with your fingers",
+            "description": "Learn how to solve a Rubick's cube",
+            "points": 0
+        },
+        {
+            "name": "Yeah Fortnite we 'bout to get down",
+            "description": "Win a solos match in a battle royale game (Fortnite, Apex, Warzone, etc.)",
+            "points": 0
+        },
+        {
+            "name": "Who doesn't love free stuff?",
+            "description": "Reach the max level in a seasonal battle pass",
+            "points": 0
+        },
+        {
+            "name": "Platinum trophy",
+            "description": "100% complete a new save on any video game",
+            "points": 0
+        },
+        {
+            "name": "Back from fishin'",
+            "description": "Catch every fish in a game with a fishing mechanic",
+            "points": 0
+        },
+        {
+            "name": "Game jam",
+            "description": "Create a tiny game in a free game engine",
+            "points": 0
+        },
+        {
+            "name": "Quick enough for a Steam refund?",
+            "description": "Speedrun any game start to finish in one sitting",
+            "points": 0
+        },
+        {
+            "name": "Free the End",
+            "description": "Kill the Ender Dragon in a new, solo Minecraft world",
+            "points": 0
+        },
+        {
+            "name": "Eat it, Joja",
+            "description": "Complete the Community Centre on a new farm in Stardew Valley",
+            "points": 0
+        },
+        {
+            "name": "Magnus",
+            "description": "Practice and reach an ELO of at least 1,000 in chess",
+            "points": 0
+        },
+        {
+            "name": "That's enough cookies!!",
+            "description": "Reach the first ascension in cookie clicker",
+            "points": 0
+        }
+    ],
+    "food": [
+        {
+            "name": "Without the pepper, what connects the goat cheese and the shrimp?",
+            "description": "Go to a food festival and try something new",
+            "points": 0
+        },
+        {
+            "name": "For the love of God, don't pick a kiwi",
+            "description": "Eat a food named after a place in the place it's named after",
+            "points": 0
+        }
+    ],
+    "creative": [
+        {
+            "name": "#nofilter",
+            "description": "Document what you get up to for a week on a disposable camera",
+            "points": 0
+        },
+        {
+            "name": "You looked cooler back then",
+            "description": "Recreate a photo of you as a child",
+            "points": 0
+        },
+        {
+            "name": "Paper trail",
+            "description": "Make a scrapbook page based on what you've done this month",
+            "points": 0
+        },
+        {
+            "name": "Tote-ally worth it",
+            "description": "Customise a blank tote bag to make a new statement piece",
+            "points": 0
+        },
+        {
+            "name": "Once upon a time...",
+            "description": "Write a short story about anything you like",
+            "points": 0
+        },
+        {
+            "name": "Stick 'em up",
+            "description": "Decorate your phone or laptop case with stickers",
+            "points": 0
+        },
+        {
+            "name": "Dye another day",
+            "description": "Tie dye and old t-shirt and make it into something new",
+            "points": 0
+        },
+        {
+            "name": "The fairest of them all",
+            "description": "Decorate your mirror",
+            "points": 0
+        },
+        {
+            "name": "Hooked on a feeling",
+            "description": "Learn how to crochet and make something cool",
+            "points": 0
+        },
+        {
+            "name": "Smells like teen spirit",
+            "description": "DIY a candle with your favourite scent",
+            "points": 0
+        },
+        {
+            "name": "Potteryhead",
+            "description": "Go ceramic painting",
+            "points": 0
+        },
+        {
+            "name": "Honey, I shrank the tourists",
+            "description": "Take some forced perspective photographs",
+            "points": 0
+        },
+        {
+            "name": "The Amazing Technicolor Dreamcoat",
+            "description": "Sow or iron some patches onto some jeans or a jacket to customise them",
+            "points": 0
+        },
+        {
+            "name": "Now That's What I Call Summer!",
+            "description": "Make a summer playlist",
+            "points": 0
+        },
+        {
+            "name": "Dear diary",
+            "description": "Keep a journal and write about what you do this summer",
+            "points": 0
+        }
+    ],
+    "activities": [
+        {
+            "name": "Loop the loop",
+            "description": "Go to a theme park and ride a rollercoaster with a loop",
+            "points": 0
+        },
+        {
+            "name": "Strike it lucky",
+            "description": "Play a game of bowling",
+            "points": 0
+        },
+        {
+            "name": "The great escape",
+            "description": "Get locked in an escape room and beat it before the time runs out",
+            "points": 0
+        },
+        {
+            "name": "One hundred and eighty!",
+            "description": "Play a round of darts or axe throwing and stick a bullseye",
+            "points": 0
+        },
+        {
+            "name": "Booiiinnnnggggg",
+            "description": "Visit a trampoline park",
+            "points": 0
+        },
+        {
+            "name": "Cliffhanger",
+            "description": "Go indoor rock climbing",
+            "points": 0
+        },
+        {
+            "name": "At least this one wont cost $90",
+            "description": "Try your hand at go-kart racing",
+            "points": 0
+        },
+        {
+            "name": "This one's a good ice breaker",
+            "description": "Find a rink and go ice skating",
+            "points": 0
+        },
+        {
+            "name": "Zipping off",
+            "description": "Take a ride on a zipine",
+            "points": 0
+        },
+        {
+            "name": "Token victory",
+            "description": "Go to an arcade and win something on a coin pusher",
+            "points": 0
+        },
+        {
+            "name": "Jackson Pollock, in the flesh",
+            "description": "Gear up and go paintballing",
+            "points": 0
+        },
+        {
+            "name": "Hold on tight!",
+            "description": "Ride a mechanical bull and try not to fall off",
+            "points": 0
+        },
+        {
+            "name": "Saddle up",
+            "description": "Go horseriding",
+            "points": 0
+        },
+        {
+            "name": "Sound check",
+            "description": "Go to a concert",
+            "points": 0
+        },
+        {
+            "name": "Fishy business",
+            "description": "Visit an aquarium and touch a fish in a touch tank",
+            "points": 0
+        },
+        {
+            "name": "Marty we've got to go back!",
+            "description": "Visit a museum and find something at least 1,000 years old",
+            "points": 0
+        },
+        {
+            "name": "Are you smarter than a 10 year old?",
+            "description": "Test your knowledge at a pub quiz or trivia night",
+            "points": 0
+        },
+        {
+            "name": "I hope Casper's all you find",
+            "description": "Go on a ghost tour",
+            "points": 0
+        },
+        {
+            "name": "Anyway up",
+            "description": "Go to a bingo hall for the night",
+            "points": 0
+        },
+        {
+            "name": "Close encounters of the first kind",
+            "description": "Visit a zoo or safari park",
+            "points": 0
+        },
+        {
+            "name": "This would be easier with a vandal",
+            "description": "Play a round of laser tag",
+            "points": 0
+        },
+        {
+            "name": "Retro rollin'",
+            "description": "Have some retro fun at a roller rink",
+            "points": 0
+        },
+        {
+            "name": "LOL out loud",
+            "description": "Attend a live event at a comedy club",
+            "points": 0
+        },
+        {
+            "name": "*Squeaky floor sound effect*",
+            "description": "Spend the night at a silent disco",
+            "points": 0
+        },
+        {
+            "name": "IRL Smash Bros.",
+            "description": "Smash things up in a rage room",
+            "points": 0
+        },
+        {
+            "name": "You're not Philippe Petit",
+            "description": "Attempt a high ropes course",
+            "points": 0
+        },
+        {
+            "name": "Become the hamster",
+            "description": "Go zorbing",
+            "points": 0
+        },
+        {
+            "name": "Target acquired",
+            "description": "Try to shoot a bullseye at an archery range",
+            "points": 0
+        },
+        {
+            "name": "Total Wipeout",
+            "description": "Complete an inflatable assault course",
+            "points": 0
+        },
+        {
+            "name": "Starry-eyed",
+            "description": "See a show at a planetarium",
+            "points": 0
+        },
+        {
+            "name": "Strategist",
+            "description": "Spend an afternoon at a board game café",
+            "points": 0
+        },
+        {
+            "name": "Put your Crocs in sport mode",
+            "description": "Attend a professional game of a sport of your choice",
+            "points": 0
+        },
+        {
+            "name": "Driving rage",
+            "description": "Empty a bucket at a driving range",
+            "points": 0
+        },
+        {
+            "name": "Brian's better",
+            "description": "Pet cats at a cat café",
+            "points": 0
+        },
+        {
+            "name": "Curtain call",
+            "description": "Watch a production at a theatre",
+            "points": 0
+        },
+        {
+            "name": "Maze Runner",
+            "description": "Explore and try and beat a hedge or corn maze",
+            "points": 0
+        },
+        {
+            "name": "Ready, player one?",
+            "description": "Experience a VR simulation at a VR arcade or similar venue",
+            "points": 0
+        },
+        {
+            "name": "Pixel puncher",
+            "description": "Play old arcade machines at an arcade bar",
+            "points": 0
+        },
+        {
+            "name": "Hope it's not rum and raisin",
+            "description": "Try a bizzare flavour at an ice cream parlor",
+            "points": 0
+        },
+        {
+            "name": "How time flies",
+            "description": "Have a look round a historical or stately home",
+            "points": 0
+        },
+        {
+            "name": "You're in the splash zone",
+            "description": "Go to a water park and ride a water slide",
+            "points": 0
+        },
+        {
+            "name": "Ahoy, Cap'N",
+            "description": "Take a trip on a touritstic boat ride or river cruise",
+            "points": 0
+        },
+        {
+            "name": "Only Zia gets higher than this",
+            "description": "Take in the view atop a rooftop viewing gallery",
+            "points": 0
+        },
+        {
+            "name": "Boardwalkin' or bored walkin'",
+            "description": "Take a stroll down an amusement pier",
+            "points": 0
+        },
+        {
+            "name": "Llamaste",
+            "description": "Feed an animal at a petting zoo",
+            "points": 0
+        },
+        {
+            "name": "Arthur Morgan",
+            "description": "Ride a carousel at a classic fairground",
+            "points": 0
+        },
+        {
+            "name": "Steamy",
+            "description": "Have a well deserved break at a sauna",
+            "points": 0
+        },
+        {
+            "name": "A well deserved break",
+            "description": "Relax for an afternoon at a spa",
+            "points": 0
+        },
+        {
+            "name": "Hope you don't meet any film bros",
+            "description": "Catch a screening at an independent cinema or film festival",
+            "points": 0
+        },
+        {
+            "name": "Jazzy",
+            "description": "Spend an evening at a jazz club",
+            "points": 0
+        },
+        {
+            "name": "A beau-tee-full shot",
+            "description": "Try and get a hole-in-hole at a mini golf course",
+            "points": 0
+        },
+        {
+            "name": "I like trains... *NYOOOM*",
+            "description": "Ride a miniature or steam train",
+            "points": 0
+        }
     ]
-  }
-  
+}

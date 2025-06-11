@@ -50,8 +50,7 @@ h1 {
   color: #555;
 }
 
-.taskContainer button,
-.taskContainer a[href*="taskProof.html"] {
+.taskContainer a {
   align-self: flex-start;
   margin-top: 0.5rem;
   padding: 0.5rem 1.2rem;
@@ -66,8 +65,7 @@ h1 {
   text-decoration: none;
 }
 
-.taskContainer button:hover,
-.taskContainer a[href*="taskProof.html"]:hover {
+.taskContainer a  :hover {
   background-color: #FAD4C0;
   color: #333;
 }

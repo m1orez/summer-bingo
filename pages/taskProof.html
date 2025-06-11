@@ -2,14 +2,24 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>task proof | Summer bingo</title>
-    <link rel="stylesheet" href="../styles/taskProof.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task Proof | Summer Bingo</title>
+  <!-- <link rel="stylesheet" href="../styles/taskProof.css" /> -->
 </head>
 
 <body>
-
+  <main class="proof-container">
+    <h1 id="task-title">Submitting Proof</h1>
+    <p id="task-desc"></p>
+    <form id="proofForm">
+      <input type="file" id="proofImage" accept="image/*" required />
+      <button type="submit">Upload Proof</button>
+    </form>
+    <p id="statusMessage"></p>
+  </main>
+  <script type="module" src="../scripts/firebaseConfig.js"></script>
+  <script type="module" src="../scripts/taskProof.js"></script>
 </body>
 
 </html>
