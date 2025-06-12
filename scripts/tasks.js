@@ -12,35 +12,69 @@ import { auth, db } from "./firebaseConfig.js";
 
 let currentTasks = [];
 
-onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    const userRef = doc(db, "users", user.uid);
-    const userSnap = await getDoc(userRef);
+const unlockTime = new Date("2025-06-14T01:00:00+02:00");
 
-    if (userSnap.exists()) {
-      const userData = userSnap.data();
 
-      // 🟡 Update seashell display
-      const seashellDisplay = document.getElementById("seashells");
-      if (seashellDisplay) {
-        seashellDisplay.textContent = userData.seashells || 0;
-      }
+function showCountdown() {
+  const wrapper = document.querySelector(".tasks-wrapper");
+  wrapper.innerHTML = "<div class='countdown'></div>";
 
-      if (!userData.interests || userData.interests.length === 0) {
-        showInterestPopup();
-      } else {
-        if (userData.currentTasks && userData.currentTasks.length > 0) {
-          currentTasks = userData.currentTasks;
-        } else {
-          currentTasks = await generateAndSaveTasks(userRef, userData.interests);
-        }
-        renderTasks(currentTasks);
-      }
+  const countdownEl = document.querySelector(".countdown");
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = unlockTime - now;
+
+    if (diff <= 0) {
+      location.reload();
+    } else {
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      countdownEl.textContent = `Tasks unlock in ${hours}h ${minutes}m ${seconds}s`;
     }
-  } else {
-    window.location.href = "../index.html";
   }
-});
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+}
+
+function initTaskPage() {
+  const now = new Date();
+  if (now >= unlockTime) {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+          const userData = userSnap.data();
+
+          const seashellDisplay = document.getElementById("seashells");
+          if (seashellDisplay) {
+            seashellDisplay.textContent = userData.seashells || 0;
+          }
+
+          if (!userData.interests || userData.interests.length === 0) {
+            showInterestPopup();
+          } else {
+            if (userData.currentTasks && userData.currentTasks.length > 0) {
+              currentTasks = userData.currentTasks;
+            } else {
+              currentTasks = await generateAndSaveTasks(userRef, userData.interests);
+            }
+            renderTasks(currentTasks);
+          }
+        }
+      } else {
+        window.location.href = "../index.html";
+      }
+    });
+  } else {
+    showCountdown();
+  }
+}
 
 async function generateAndSaveTasks(userRef, interests) {
   const response = await fetch("../tasks.json");
@@ -89,3 +123,5 @@ function renderTasks(tasks) {
     wrapper.appendChild(container);
   });
 }
+
+initTaskPage();
