@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reroll Task | Summer Bingo</title>
+  <link rel="stylesheet" href="../styles/rerollTask.css" />
+</head>
+<body>
+    <main>
+        <h1>Reroll Task</h1>
+        <div class="task-display">
+          <h2 id="taskName"></h2>
+          <p id="taskDescription"></p>
+        </div>
+      
+        <p id="warning" style="color:red; margin-top: 1rem;"></p>
+        <p>Cost: 5 seashells</p>
+        <p>Your seashells: <span id="seashells"></span></p>
+        <button id="confirmBtn">Confirm Reroll</button>
+        <a href="./tasks.html">Cancel</a>
+      </main>
+      
+  <script type="module" src="../scripts/firebaseConfig.js"></script>
+  <script type="module" src="../scripts/rerollTask.js"></script>
+</body>
+</html>

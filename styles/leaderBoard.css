@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #FAE3D9, #BBDED6);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  color: #333;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #4BBCF4;
+    margin-bottom: 1.5rem;
+  }
+
+#leaderBoard {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+  }
+  
+  #leaderBoard ul {
+    list-style:  none;
+    padding-left: 2rem;
+  }
+  
+  #leaderBoard li {
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid #FAD4C0;
+    color: #333;
+    transition: background-color 0.3s ease;
+    border-radius: 0.8rem;
+  }
+  
+  #leaderBoard li:last-child {
+    border-bottom: none;
+  }
+  
+  @media (max-width: 768px) {
+    #leaderBoard {
+      width: 95%;
+      padding: 1.5rem;
+    }
+  }
+  

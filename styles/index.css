@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  background: linear-gradient(135deg, #FAE3D9, #BBDED6);
+  color: #333;
+}
+
+img {
+  width: 50vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+#login {
+  width: 50vw;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+#login h1 {
+  font-size: 3rem;
+  color: #61C0BF;
+  margin-bottom: 1rem;
+}
+
+#login p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+.input-container {
+  margin-bottom: 1.5rem;
+}
+
+.input-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 1rem;
+  background-color: #fff;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+.input-container input:focus {
+  border-color: #FFB6B9;
+  outline: none;
+}
+
+button {
+  padding: 0.8rem 1.5rem;
+  background-color: #FFB6B9;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #FAD4C0;
+  color: #333;
+}
+
+form p {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+form a {
+  color: #61C0BF;
+  text-decoration: none;
+}
+
+form a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  img {
+    width: 100vw;
+    height: 40vh;
+  }
+
+  #login {
+    width: 100vw;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  #login h1 {
+    font-size: 2rem;
+  }
+}
