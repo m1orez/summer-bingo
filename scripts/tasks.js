@@ -12,7 +12,7 @@ import { auth, db } from "./firebaseConfig.js";
 let currentTasks = [];
 let currentTaskProof = [];
 
-const unlockTime = new Date("2025-06-10T01:00:00+02:00");
+const unlockTime = new Date("2025-06-10T01:30:00+02:00");
 
 function showCountdown() {
   const wrapper = document.querySelector(".tasks-wrapper");
@@ -59,11 +59,31 @@ function initTaskPage() {
           if (!userData.interests || userData.interests.length === 0) {
             showInterestPopup();
           } else {
+            const allTasks = await fetchAllTasks();
+            const completedNames = new Set((userData.tasksCompleted || []).map(t => t.taskName));
+            const usedNames = new Set([...completedNames]);
+
             if (userData.currentTasks && userData.currentTasks.length > 0) {
               currentTasks = userData.currentTasks;
+
+              for (let i = 0; i < currentTasks.length; i++) {
+                const task = currentTasks[i];
+                if (completedNames.has(task.name)) {
+                  const replacement = await findReplacementTask(allTasks, userData.interests, usedNames);
+                  if (replacement) {
+                    currentTasks[i] = replacement;
+                    usedNames.add(replacement.name);
+                  }
+                } else {
+                  usedNames.add(task.name);
+                }
+              }
+
+              await updateDoc(userRef, { currentTasks });
             } else {
               currentTasks = await generateAndSaveTasks(userRef, userData.interests);
             }
+
             currentTaskProof = userData.taskProof || [];
             renderTasks(currentTasks, currentTaskProof);
           }
@@ -77,21 +97,52 @@ function initTaskPage() {
   }
 }
 
-async function generateAndSaveTasks(userRef, interests) {
+async function fetchAllTasks() {
   const response = await fetch("../tasks.json");
-  const allTasks = await response.json();
+  return await response.json();
+}
 
-  let pool = [];
+async function findReplacementTask(allTasks, interests, excludeSet) {
+  const pool = [];
 
-  interests.forEach((interest) => {
-    if (allTasks[interest]) {
-      pool = pool.concat(allTasks[interest]);
+  for (const interest of interests) {
+    const tasks = allTasks[interest] || [];
+    for (const task of tasks) {
+      if (!excludeSet.has(task.name)) {
+        pool.push(task);
+      }
     }
-  });
+  }
 
-  const selected = shuffleArray(pool).slice(0, 10);
+  if (pool.length === 0) return null;
+
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+async function generateAndSaveTasks(userRef, interests) {
+  const allTasks = await fetchAllTasks();
+  const selected = selectTasksFromInterests(allTasks, interests, 10);
   await updateDoc(userRef, { currentTasks: selected });
   return selected;
+}
+
+function selectTasksFromInterests(allTasks, interests, maxTasks = 10) {
+  let selectedTasks = [];
+
+  const shuffledInterestsTasks = interests.map((interest) => {
+    const tasks = allTasks[interest] || [];
+    return shuffleArray(tasks);
+  });
+
+  const tasksPerInterest = Math.ceil(maxTasks / interests.length);
+
+  shuffledInterestsTasks.forEach((tasks) => {
+    selectedTasks = selectedTasks.concat(tasks.slice(0, tasksPerInterest));
+  });
+
+  selectedTasks = shuffleArray(selectedTasks).slice(0, maxTasks);
+
+  return selectedTasks;
 }
 
 function shuffleArray(array) {

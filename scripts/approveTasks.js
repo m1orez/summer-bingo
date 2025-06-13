@@ -1,7 +1,6 @@
 import { auth, db } from "./firebaseConfig.js";
 import {
-  onAuthStateChanged,
-  signOut,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import {
   doc,
@@ -9,88 +8,59 @@ import {
   updateDoc,
   collection,
   getDocs,
+  arrayUnion,
+  arrayRemove
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+const feedWrapper = document.querySelector(".proof-feed");
 let currentUser = null;
 let currentUserData = null;
 
-const feedWrapper = document.querySelector(".proof-feed");
+async function fetchAllProofsAndUsers() {
+  const usersCol = collection(db, "users");
+  const usersSnap = await getDocs(usersCol);
+  let allProofs = [];
+  let usersMap = {};
 
-function shuffleArray(array) {
-  return array
-    .map((value) => ({ value, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ value }) => value);
-}
+  for (const userDoc of usersSnap.docs) {
+    const data = userDoc.data();
+    usersMap[userDoc.id] = data.username || userDoc.id;
 
-async function generateAndSaveSingleTask(
-  userRef,
-  interests,
-  completedTasks = [],
-  skippedTasks = [],
-  currentTasks = [],
-  replaceIndex
-) {
-  const response = await fetch("../tasks.json");
-  const allTasks = await response.json();
-
-  let pool = [];
-  interests.forEach((interest) => {
-    if (allTasks[interest]) {
-      pool = pool.concat(allTasks[interest]);
+    if (Array.isArray(data.taskProof)) {
+      data.taskProof.forEach(proof => {
+        allProofs.push({
+          ...proof,
+          userId: userDoc.id,
+          uploadedAt: proof.uploadedAt?.seconds || 0
+        });
+      });
     }
-  });
-
-  const excludeTasks = [
-    ...completedTasks,
-    ...skippedTasks,
-    ...currentTasks,
-  ].map((t) => t.name);
-
-  const filteredPool = pool.filter((task) => !excludeTasks.includes(task.name));
-
-  if (filteredPool.length === 0) {
-    return currentTasks;
   }
 
-  const newTask = shuffleArray(filteredPool)[0];
-
-  const updatedCurrentTasks = [...currentTasks];
-  updatedCurrentTasks[replaceIndex] = newTask;
-
-  await updateDoc(userRef, {
-    currentTasks: updatedCurrentTasks,
-  });
-
-  return updatedCurrentTasks;
+  allProofs.sort((a, b) => (a.approvedIndex || 0) - (b.approvedIndex || 0));
+  return { allProofs, usersMap };
 }
 
-function renderProofs(proofs) {
+function renderProofs(proofs, usersMap) {
   feedWrapper.innerHTML = "";
   if (proofs.length === 0) {
     feedWrapper.textContent = "No task proofs submitted yet.";
     return;
   }
 
-  proofs.forEach((proof) => {
+  proofs.forEach(proof => {
     const {
-      taskIndex,
-      approvedIndex,
-      denyIndex,
-      imageUrl,
-      uploadedAt,
-      userId,
-      username,
       taskName,
       taskDescription,
-      points,
+      taskPoints,
+      imageUrl,
+      approvedIndex = 0,
+      denyIndex = 0,
+      userId
     } = proof;
 
-    const canVote =
-      currentUser &&
-      currentUser.uid !== userId &&
-      !hasUserVoted(proof, currentUser.uid) &&
-      currentUser.uid !== userId;
+    const username = usersMap[userId] || userId;
+    const canVote = currentUser && currentUser.uid !== userId && !proof.voters?.includes(currentUser.uid);
 
     const proofCard = document.createElement("div");
     proofCard.className = "proof-card";
@@ -98,19 +68,16 @@ function renderProofs(proofs) {
     proofCard.innerHTML = `
       <img src="${imageUrl}" alt="Proof image" class="proof-image" />
       <div class="proof-info">
-        <h3>${taskName || "Unnamed task"}</h3>
-        <p>${taskDescription || ""}</p>
-        <p>Points: ${points || 0}</p>
-        <p>Submitted: ${new Date(uploadedAt.seconds * 1000).toLocaleString()}</p>
-        <p>👍 ${approvedIndex || 0} &nbsp;&nbsp; 👎 ${denyIndex || 0}</p>
+        <h3>${taskName || "Unnamed Task"}</h3>
+        <p>${taskDescription || "No description provided."}</p>
+        <p>Points: ${taskPoints || 0}</p>
+        <p>👍 ${approvedIndex} &nbsp;&nbsp; 👎 ${denyIndex}</p>
       </div>
       <div class="proof-actions">
         <button class="thumbs-up" ${canVote ? "" : "disabled"}>👍</button>
         <button class="thumbs-down" ${canVote ? "" : "disabled"}>👎</button>
       </div>
-      <p class="proof-submitter">Submitted by: ${
-        userId === currentUser.uid ? "You" : username
-      }</p>
+      <p class="proof-submitter">Submitted by: ${userId === currentUser.uid ? "You" : username}</p>
     `;
 
     const upBtn = proofCard.querySelector(".thumbs-up");
@@ -125,85 +92,98 @@ function renderProofs(proofs) {
   });
 }
 
-function hasUserVoted(proof, voterUid) {
-  if (!proof.votes) return false;
-  return proof.votes.some((vote) => vote.userId === voterUid);
-}
+async function generateNewTask(interests, currentTasks, completedTasks) {
+  const response = await fetch("../tasks.json");
+  const allTasks = await response.json();
+  const completedNames = new Set(completedTasks.map(t => t.taskName));
+  const currentNames = new Set(currentTasks.map(t => t.name));
+  const seen = new Set([...completedNames, ...currentNames]);
 
-async function fetchAllProofs() {
-  const usersCol = collection(db, "users");
-  const usersSnapshot = await getDocs(usersCol);
-
-  let allProofs = [];
-
-  for (const userDoc of usersSnapshot.docs) {
-    const userData = userDoc.data();
-    if (userData.taskProof && Array.isArray(userData.taskProof)) {
-      userData.taskProof.forEach((proof) => {
-        const task =
-          (userData.currentTasks && userData.currentTasks[proof.taskIndex]) ||
-          (userData.completedTasks && userData.completedTasks[proof.taskIndex]) ||
-          null;
-
-        allProofs.push({
-          ...proof,
-          userId: userDoc.id,
-          username: userData.username || "Unknown User",
-          taskName: task ? task.name : "Unknown Task",
-          taskDescription: task ? task.description || "" : "",
-          points: task ? task.points : 0,
-        });
-      });
+  let potentialTasks = [];
+  for (const interest of interests) {
+    const categoryTasks = allTasks[interest] || [];
+    for (const task of categoryTasks) {
+      if (!seen.has(task.name)) {
+        potentialTasks.push(task);
+      }
     }
   }
 
-  allProofs.sort((a, b) => b.uploadedAt.seconds - a.uploadedAt.seconds);
+  if (potentialTasks.length === 0) return null;
 
-  return allProofs;
+  const newTask = potentialTasks[Math.floor(Math.random() * potentialTasks.length)];
+  return newTask;
 }
 
 async function handleVote(proof, vote) {
   if (!currentUser) return alert("You must be logged in to vote.");
   if (currentUser.uid === proof.userId) return alert("You cannot vote on your own proof.");
-  if (hasUserVoted(proof, currentUser.uid)) return alert("You have already voted on this proof.");
+  if (proof.voters && proof.voters.includes(currentUser.uid)) return alert("You have already voted on this proof.");
 
   const proofOwnerRef = doc(db, "users", proof.userId);
-
   try {
-    const proofOwnerSnap = await getDoc(proofOwnerRef);
-    if (!proofOwnerSnap.exists()) throw new Error("Proof owner user data missing.");
+    const ownerSnap = await getDoc(proofOwnerRef);
+    if (!ownerSnap.exists()) throw new Error("Proof owner data not found.");
+    const ownerData = ownerSnap.data();
 
-    const proofOwnerData = proofOwnerSnap.data();
-
-    const proofIndex = proofOwnerData.taskProof.findIndex(
-      (p) =>
-        p.taskIndex === proof.taskIndex &&
-        p.uploadedAt.seconds === proof.uploadedAt.seconds &&
-        p.imageUrl === proof.imageUrl
+    const proofs = ownerData.taskProof || [];
+    const proofIndex = proofs.findIndex(p =>
+      p.imageUrl === proof.imageUrl &&
+      p.taskName === proof.taskName &&
+      p.taskDescription === proof.taskDescription &&
+      p.taskPoints === proof.taskPoints
     );
-    if (proofIndex === -1) throw new Error("Proof object not found in owner's data.");
+    if (proofIndex === -1) throw new Error("Proof not found in owner's data.");
 
-    const updatedProofs = [...proofOwnerData.taskProof];
-    const targetProof = { ...updatedProofs[proofIndex] };
+    let updatedProof = { ...proofs[proofIndex] };
+    updatedProof.approvedIndex = updatedProof.approvedIndex || 0;
+    updatedProof.denyIndex = updatedProof.denyIndex || 0;
+    updatedProof.voters = updatedProof.voters || [];
 
-    if (!targetProof.votes) targetProof.votes = [];
+    if (vote === 1) updatedProof.approvedIndex++;
+    else if (vote === -1) updatedProof.denyIndex++;
 
-    if (vote === 1) {
-      targetProof.approvedIndex = (targetProof.approvedIndex || 0) + 1;
-    } else if (vote === -1) {
-      targetProof.denyIndex = (targetProof.denyIndex || 0) + 1;
+    updatedProof.voters.push(currentUser.uid);
+    proofs[proofIndex] = updatedProof;
+
+    let updateData = { taskProof: proofs };
+
+    if (updatedProof.approvedIndex >= 2) {
+      const completedTaskExists = ownerData.tasksCompleted?.some(t => t.taskName === updatedProof.taskName && t.imageUrl === updatedProof.imageUrl);
+      if (!completedTaskExists) {
+        const newCompleted = ownerData.tasksCompleted ? [...ownerData.tasksCompleted] : [];
+        newCompleted.push({
+          taskName: updatedProof.taskName,
+          taskDescription: updatedProof.taskDescription,
+          taskPoints: updatedProof.taskPoints,
+          imageUrl: updatedProof.imageUrl
+        });
+
+        const currentTasks = ownerData.currentTasks || [];
+        const completedTasks = newCompleted;
+        const indexToReplace = currentTasks.findIndex(t => t.name === updatedProof.taskName);
+
+        let newTask = null;
+        if (ownerData.interests) {
+          newTask = await generateNewTask(ownerData.interests, currentTasks, completedTasks);
+        }
+
+        if (newTask && indexToReplace !== -1) {
+          currentTasks[indexToReplace] = newTask;
+        }
+
+        updateData.tasksCompleted = newCompleted;
+        updateData.seashells = (ownerData.seashells || 0) + (updatedProof.taskPoints || 0);
+        updateData.currentTasks = currentTasks;
+      }
     }
 
-    targetProof.votes.push({ userId: currentUser.uid, vote });
+    if (updatedProof.denyIndex >= 2) {
+      proofs.splice(proofIndex, 1);
+      updateData.taskProof = proofs;
+    }
 
-    updatedProofs[proofIndex] = targetProof;
-
-    await updateDoc(proofOwnerRef, {
-      taskProof: updatedProofs,
-    });
-
-    await postVoteCheck(proofOwnerRef, proofOwnerData, targetProof);
-
+    await updateDoc(proofOwnerRef, updateData);
     alert("Vote recorded!");
     loadAndRenderProofs();
   } catch (err) {
@@ -211,55 +191,12 @@ async function handleVote(proof, vote) {
   }
 }
 
-async function postVoteCheck(proofOwnerRef, proofOwnerData, proof) {
-  if (proof.approvedIndex >= 2) {
-    const taskToComplete = proofOwnerData.currentTasks?.[proof.taskIndex];
-    if (!taskToComplete) return;
-
-    const updatedCompleted = proofOwnerData.completedTasks ? [...proofOwnerData.completedTasks] : [];
-    updatedCompleted.push(taskToComplete);
-
-    const updatedCurrent = [...proofOwnerData.currentTasks];
-    updatedCurrent.splice(proof.taskIndex, 1);
-
-    const updatedProofs = (proofOwnerData.taskProof || []).filter(
-      (p) => p.taskIndex !== proof.taskIndex
-    );
-
-    const newSeashells = (proofOwnerData.seashells || 0) + (taskToComplete.points || 0);
-
-    const updatedCurrentWithNewTask = await generateAndSaveSingleTask(
-      proofOwnerRef,
-      proofOwnerData.interests,
-      updatedCompleted,
-      proofOwnerData.skippedTasks || [],
-      updatedCurrent,
-      proof.taskIndex
-    );
-
-    await updateDoc(proofOwnerRef, {
-      completedTasks: updatedCompleted,
-      currentTasks: updatedCurrentWithNewTask,
-      taskProof: updatedProofs,
-      seashells: newSeashells,
-    });
-  } else if (proof.denyIndex >= 2) {
-    const updatedProofs = (proofOwnerData.taskProof || []).filter(
-      (p) => p.taskIndex !== proof.taskIndex
-    );
-
-    await updateDoc(proofOwnerRef, {
-      taskProof: updatedProofs,
-    });
-  }
-}
-
 async function loadAndRenderProofs() {
   try {
-    const proofs = await fetchAllProofs();
-    renderProofs(proofs);
-  } catch {
-    feedWrapper.textContent = "Failed to load proofs.";
+    const { allProofs, usersMap } = await fetchAllProofsAndUsers();
+    renderProofs(allProofs, usersMap);
+  } catch (err) {
+    feedWrapper.textContent = "Failed to load proof.";
   }
 }
 
@@ -269,21 +206,10 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
   currentUser = user;
-
   const userRef = doc(db, "users", user.uid);
   const userSnap = await getDoc(userRef);
   if (userSnap.exists()) {
     currentUserData = userSnap.data();
   }
-
-  const logoutBtn = document.getElementById("logoutBtn");
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-      signOut(auth).then(() => {
-        window.location.href = "../index.html";
-      });
-    });
-  }
-
   loadAndRenderProofs();
 });

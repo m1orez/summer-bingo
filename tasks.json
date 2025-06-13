@@ -22,7 +22,7 @@
         },
         {
             "name": "You might not be able to spell after this",
-            "description": "Have a drink for 5 consequetive letters of the alphabet (Aperol spritz, Buck's fizz, etc.)",
+            "description": "Have a drink for each letter of the alphabet (Aperol spritz, Buck's fizz, etc.)",
             "points": 0
         },
         {
@@ -53,6 +53,66 @@
         {
             "name": "What are you doing with your life",
             "description": "Get drunk before noon on a weekday",
+            "points": 0
+        },
+        {
+            "name": "Ssshhh",
+            "description": "Have a drink in a secret bar",
+            "points": 0
+        },
+        {
+            "name": "The fourth king calls your name",
+            "description": "Play a game of ring of fire",
+            "points": 0
+        },
+        {
+            "name": "Impossible",
+            "description": "Go clubbing and stay out the whole night",
+            "points": 0
+        },
+        {
+            "name": "Granddaddy purple",
+            "description": "Get high",
+            "points": 0
+        },
+        {
+            "name": "Unleash your inner Rory",
+            "description": "Play a round of pub/bar golf",
+            "points": 0
+        },
+        {
+            "name": "Make like a frat house",
+            "description": "Win a game of beer pong",
+            "points": 0
+        },
+        {
+            "name": "Only the airport beer is better",
+            "description": "Induldge in the legendary shower beer",
+            "points": 0
+        },
+        {
+            "name": "What's in a song",
+            "description": "Drink a drink while singing a song titled after that drink (e.g. red wine to 'Red Wine Supernova')",
+            "points": 0
+        },
+        {
+            "name": "Virtual alcoholism",
+            "description": "Get somebody not present to order a drink to your table",
+            "points": 0
+        },
+        {
+            "name": "You'll topple before the tower does",
+            "description": "Play drunk jenga (write forfeits on the blocks)",
+            "points": 0
+        },
+        {
+            "name": "Devilish, this one",
+            "description": "Complete the 666 challenge: 6 bars, 6 drinks and 6 shots - before midnight",
+            "points": 0
+        },
+        {
+            "name": "You're a wizard Harry",
+            "description": "Play wizard staff with a group of mates",
             "points": 0
         }
     ],
@@ -128,6 +188,11 @@
             "name": "You might regret this",
             "description": "Sing your favourite song at a karaoke event",
             "points": 0
+        },
+        {
+            "name": "I should doxx Jas",
+            "description": "Egg someone's house",
+            "points": 0
         }
     ],
     "indoors": [
@@ -185,6 +250,16 @@
             "name": "That's enough cookies!!",
             "description": "Reach the first ascension in cookie clicker",
             "points": 0
+        },
+        {
+            "name": "Look behind you",
+            "description": "Watch a horror movie",
+            "points": 0
+        },
+        {
+            "name": "Hate to be that guy...",
+            "description": "Tidy your room (you know it needs doing)",
+            "points": 0
         }
     ],
     "food": [
@@ -194,8 +269,148 @@
             "points": 0
         },
         {
+            "name": "I scream for ice-cream",
+            "description": "Try a bizarre flavour at an ice cream parlor",
+            "points": 0
+        },
+        {
             "name": "For the love of God, don't pick a kiwi",
             "description": "Eat a food named after a place in the place it's named after",
+            "points": 0
+        },
+        {
+            "name": "Global gastronomy",
+            "description": "Pick a country you've never been to and try some snacks from there",
+            "points": 0
+        },
+        {
+            "name": "Mother Nature's treat",
+            "description": "Grow your own herbs or vegetables and use them in a dish",
+            "points": 0
+        },
+        {
+            "name": "Breadwinner",
+            "description": "Learn how to make bread from scratch",
+            "points": 0
+        },
+        {
+            "name": "Creamy",
+            "description": "Make your own ice cream (and maybe a new flavour)",
+            "points": 0
+        },
+        {
+            "name": "The blacker the berry",
+            "description": "Go urban foraging and taste what you find (be safe)",
+            "points": 0
+        },
+        {
+            "name": "Good Samaritan",
+            "description": "Donate to or volunteer at a food bank",
+            "points": 0
+        },
+        {
+            "name": "Your mission, should you choose to accept it",
+            "description": "Try a food challenge and see if you can finish everything",
+            "points": 0
+        },
+        {
+            "name": "Don't pick the umbrella",
+            "description": "Cook Dalgona and try not to crack the shapes",
+            "points": 0
+        },
+        {
+            "name": "Masterchef or Kitchen Nightmares?",
+            "description": "Learn how to cook a new dish",
+            "points": 0
+        },
+        {
+            "name": "Chocolate artist",
+            "description": "Make chocolate coloured strawberries",
+            "points": 0
+        },
+        {
+            "name": "C is for cookie!",
+            "description": "Bake cookies!",
+            "points": 0
+        },
+        {
+            "name": "KBBQ King",
+            "description": "Go out for/order in KBBQ",
+            "points": 0
+        },
+        {
+            "name": "Smells good, tastes good",
+            "description": "Try something from a street food stall",
+            "points": 0
+        },
+        {
+            "name": "Mr Worldwide",
+            "description": "Make a 'food passport' and try something from five different continents",
+            "points": 0
+        },
+        {
+            "name": "Can you handle the heat?",
+            "description": "Try the spiciest pepper/hot sauce you can get your hands on",
+            "points": 0
+        },
+        {
+            "name": "Covfefe",
+            "description": "Go out for coffee at a nice café",
+            "points": 0
+        },
+        {
+            "name": "Sushi me rollin'",
+            "description": "Eat at a conveyer belt restaurant",
+            "points": 0
+        },
+        {
+            "name": "Out-pizza the Hut",
+            "description": "Make homemade pizza (in a pizza oven if you have one)",
+            "points": 0
+        },
+        {
+            "name": "Grillmaster",
+            "description": "Have a barbecue",
+            "points": 0
+        },
+        {
+            "name": "Honestly just fuck you",
+            "description": "Do the cinnamon challenge :)",
+            "points": 0
+        },
+        {
+            "name": "If only the Krusty Krab was real",
+            "description": "Go to a restaurant you've never been to before",
+            "points": 0
+        },
+        {
+            "name": "Barista at Home",
+            "description": "Make your own coffee or matcha",
+            "points": 0
+        },
+        {
+            "name": "Binging with Babish reference??",
+            "description": "Remake some food featured in a film or TV show",
+            "points": 0
+        },
+        {
+            "name": "Cheeseeee of truth!",
+            "description": "Make a grilled cheese sandwich and see how much cheese pull you get",
+            "points": 0
+        },
+        {
+            "name": "I be walkin' with the cheese, that's the queso",
+            "description": "Make a killer plate of nachos",
+            "points": 0
+        },
+        {
+            "name": "Edge people are superior btw",
+            "description": "Whip up some brownies",
+            "points": 0
+        },
+        {
+            "name": "The lifeblood of British culture",
+            "description": "Have some fish and chips wheyy",
             "points": 0
         }
     ],
@@ -468,11 +683,6 @@
             "points": 0
         },
         {
-            "name": "Hope it's not rum and raisin",
-            "description": "Try a bizzare flavour at an ice cream parlor",
-            "points": 0
-        },
-        {
             "name": "How time flies",
             "description": "Have a look round a historical or stately home",
             "points": 0
@@ -535,6 +745,11 @@
         {
             "name": "I like trains... *NYOOOM*",
             "description": "Ride a miniature or steam train",
+            "points": 0
+        },
+        {
+            "name": "8 ball",
+            "description": "Play a game of pool",
             "points": 0
         }
     ]
