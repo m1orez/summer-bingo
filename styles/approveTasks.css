@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #FAE3D9, #BBDED6);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  color: #333;
+}
+.proof-feed {
+    max-width: 600px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .proof-card {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    position: relative;
+  }
+  .proof-info {
+    margin-bottom: 0.5rem;
+  }
+  .proof-actions {
+    display: flex;
+    gap: 1rem;
+  }
+  .vote-btn {
+    cursor: pointer;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    border: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: white;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  .vote-btn.upvote {
+    background-color: #28a745;
+  }
+  .vote-btn.downvote {
+    background-color: #dc3545;
+  }
+  .vote-btn:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+
+.proof-feed {
+    max-width: 700px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    }
+
+.proof-feed img{
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+.proof-actions button.thumbs-up {
+    background-color: green;
+    border-radius: 50%;
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .proof-actions button.thumbs-down {
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .proof-actions button:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
+  

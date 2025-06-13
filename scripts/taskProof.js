@@ -76,10 +76,10 @@ onAuthStateChanged(auth, async (user) => {
         const imageUrl = data.secure_url;
         console.log("Image uploaded to Cloudinary:", imageUrl);
 
-        // Append proof to user's taskProof array with approvedIndex = 0
         const proofObject = {
           taskIndex,
           approvedIndex: 0,
+          denyIndex: 0,
           imageUrl,
           uploadedAt: new Date(),
         };

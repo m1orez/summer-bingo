@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaderboard | Summer bingo</title>
+    <title>Approve tasks | Summer bingo</title>
     <link rel="stylesheet" href="../styles/nav.css">
-    <link rel="stylesheet" href="../styles/leaderBoard.css">
+    <link rel="stylesheet" href="../styles/approveTasks.css">
 </head>
-
 <body>
     <nav>
         <a href="./tasks.html" class="brand">Summer Bingo</a>
         <div class="nav-items">
           <a href="../pages/tasks.html">Tasks</a>
-          <a id="active" href="../pages/leaderBoard.html">Leaderboard</a>
-          <a href="../pages/approveTasks.html">Approve tasks</a>
+          <a href="../pages/leaderBoard.html">Leaderboard</a>
+          <a id="active" href="../pages/approveTasks.html">Approve tasks</a>
           <p id="navGreeting"></p>
           <p id="seashells">50</p>
           <button id="logoutBtn">Logout</button>
         </div>
       </nav>
-    <div id="leaderBoard">
-        <h1>Leaderboard</h1>
-    </div>
-    <script type="module" src="../scripts/firebaseConfig.js"></script>
-    <script type="module" src="../scripts/leaderBoard.js"></script>
+      <div id="proof-feed" class="proof-feed"></div>
+    <script type="module" src="../scripts/approveTasks.js"></script>
     <script type="module" src="../scripts/nav.js"></script>
 </body>
-
 </html>

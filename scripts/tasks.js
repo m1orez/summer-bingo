@@ -3,7 +3,6 @@ import {
   onAuthStateChanged,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import {
-  getFirestore,
   doc,
   getDoc,
   updateDoc,
@@ -46,11 +45,8 @@ function initTaskPage() {
   if (now >= unlockTime) {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // Check if email is verified before proceeding
         if (!user.emailVerified) {
           alert("You must verify your email before playing.");
-          await auth.signOut();
-          window.location.href = "../index.html";
           return;
         }
 
@@ -59,23 +55,6 @@ function initTaskPage() {
 
         if (userSnap.exists()) {
           const userData = userSnap.data();
-
-          const seashellDisplay = document.getElementById("seashells");
-          if (seashellDisplay) {
-            seashellDisplay.textContent = userData.seashells || 0;
-          }
-
-          const navGreeting = document.getElementById("navGreeting");
-          if (navGreeting) {
-            const displayName = user.displayName;
-            if (displayName) {
-              navGreeting.textContent = `Hello, ${displayName}`;
-            } else if (userData.username) {
-              navGreeting.textContent = `Hello, ${userData.username}`;
-            } else {
-              navGreeting.textContent = `Hello, ${user.email}`;
-            }
-          }
 
           if (!userData.interests || userData.interests.length === 0) {
             showInterestPopup();
@@ -141,9 +120,11 @@ function renderTasks(tasks, taskProof) {
       container.classList.add("frozen");
     }
 
+    const pointsText = task.points !== undefined ? `[${task.points} pts] ` : "";
+
     container.innerHTML = `
       <div class="task-info">
-        <h2>${task.name || "Untitled Task"}</h2>
+        <h2>${pointsText}${task.name || "Untitled Task"}</h2>
         <p>${task.description || "No description available."}</p>
       </div>
       <div class="task-actions">
