@@ -36,9 +36,10 @@ registerForm.addEventListener("submit", async (e) => {
       return;
     }
 
-
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
+
+    await sendEmailVerification(user);
 
     await setDoc(doc(db, "users", user.uid), {
       username,
@@ -51,10 +52,9 @@ registerForm.addEventListener("submit", async (e) => {
       taskProof: []
     });
 
-    await sendEmailVerification(user);
-    alert("Account created! Please verify your email before logging in.");
+    alert("Account created! A verification email has been sent. You can now pick your interests.");
+    window.location.href = "pickInterests.html";
 
-    window.location.href = "../index.html";
   } catch (error) {
     console.error("Registration error:", error);
     alert(error.message);

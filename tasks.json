@@ -22,7 +22,7 @@
         },
         {
             "name": "You might not be able to spell after this",
-            "description": "Have a drink for each letter of the alphabet (Aperol spritz, Buck's fizz, etc.)",
+            "description": "Have a drink for 5 consequetive letters of the alphabet (Aperol spritz, Buck's fizz, etc.)",
             "points": 0
         },
         {

@@ -122,3 +122,33 @@ h1 {
     margin-bottom: 1rem;
   }
 }
+
+.taskContainer.frozen {
+  opacity: 0.5;
+  pointer-events: none; /* disable clicks inside container */
+  filter: grayscale(40%);
+  user-select: none;
+}
+
+/* Enable pointer-events for links to selectively disable */
+.taskContainer.frozen .task-actions a {
+  pointer-events: auto;
+}
+
+/* Disabled buttons styling */
+.taskContainer.frozen .task-actions a {
+  background-color: #ccc !important;
+  color: #666 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+/* Remove hover effects on disabled buttons */
+.taskContainer.frozen .task-actions a:hover {
+  background-color: #ccc !important;
+  color: #666 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
