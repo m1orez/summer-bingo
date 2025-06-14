@@ -114,6 +114,26 @@
             "name": "You're a wizard Harry",
             "description": "Play wizard staff with a group of mates",
             "points": 15
+        },
+        {
+            "name": "The most British thing ever",
+            "description": "Have a pint of beer in a beer garden",
+            "points": 10
+        },
+        {
+            "name": "The best kind of tea",
+            "description": "Drink a cocktail with tea in it",
+            "points": 10
+        },
+        {
+            "name": "A shot in the dark",
+            "description": "Take a shot of tequila without making a face",
+            "points": 10
+        },
+        {
+            "name": "birthday",
+            "description": "wear an 'It's my birthday' badge or t-shirt and get a free drink",
+            "points": 15
         }
     ],
     "outdoors": [
@@ -338,6 +358,61 @@
             "name": "I should doxx Jas",
             "description": "Egg someone's house",
             "points": 20
+        },
+        {
+            "name": "old companions",
+            "description": "Send a letter or postcard to your parents inviting them to a party asking them to rsvp to a made up email adress. then sign it with some made up names to confuse them",
+            "points": 10
+        },
+        {
+            "name": "cheesed off",
+            "description": " Leave a single slice of cheese on someone’s car windshield. Take a selfie with it and leave before they notice.",
+            "points": 15
+        },
+        {
+            "name": "Overdressed much",
+            "description": "Dress up (think formal wear) to go to a fast food restaurant",
+            "points": 15
+        },
+        {
+            "name": "The ultimate prank",
+            "description": "Put googly eyes on everything in your fridge",
+            "points": 10
+        },
+        {
+            "name": "Not my kid",
+            "description": "Walk past a random playground and loudly say, “Timmy, get down from there! That’s dangerous!” even though no child is named Timmy or related to you.",
+            "points": 15
+        },
+        {
+            "name": "tindog, old but never forgotten",
+            "description": "Make a poster for tinder for dogs and put it up in your local park",
+            "points": 15
+        },
+        {
+            "name": "The reverse pickpocket",
+            "description": "Slip a funny note or small item into a stranger's pocket or bag without them noticing",
+            "points": 15
+        },
+        {
+            "name": "Uno reverse society",
+            "description": "Hand someone doing their job (cashier, security, barista, etc.) an uno reverse card",
+            "points": 15
+        },
+        {
+            "name": "WHERE'S GREG??",
+            "description": " Ask three different strangers if they’ve seen “Greg.” Act increasingly panicked. Never explain who Greg is.",
+            "points": 15
+        },
+        {
+            "name": "argh",
+            "description": "Leave a voicemail to a friend or parent where you speak only in pirate language. End it with 'they’ve found me. I must go.'",
+            "points": 15
+        },
+        {
+            "name": "Water Sommelier",
+            "description": "Bring three different brands of bottled water to a party or hangout and insist on doing a formal tasting. Take it extremely seriously.",
+            "points": 15
         }
     ],
     "indoors": [
@@ -405,6 +480,16 @@
             "name": "Hate to be that guy...",
             "description": "Tidy your room (you know it needs doing)",
             "points": 10
+        },
+        {
+            "name": "the walls are talking",
+            "description": "stay up all night untill the sun comes up",
+            "points": 10
+        },
+        {
+            "name": "touch some grass",
+            "description": "literally touch some grass",
+            "points": 10
         }
     ],
     "food": [
@@ -465,7 +550,7 @@
         },
         {
             "name": "Chocolate artist",
-            "description": "Make chocolate coloured strawberries",
+            "description": "Make chocolate covered strawberries",
             "points": 10
         },
         {
@@ -551,6 +636,11 @@
         {
             "name": "The lifeblood of British culture",
             "description": "Have some fish and chips wheyy",
+            "points": 10
+        }, 
+        {
+            "name": "The best kind of tea",
+            "description": "Make a cup of tea and drink it in a nice spot",
             "points": 10
         }
     ],
@@ -654,6 +744,36 @@
             "name": "Preferably don't make an outline",
             "description": "Get some chalk and make a street mural",
             "points": 10
+        },
+        {
+            "name": "The art of the deal",
+            "description": "Make a piece of art and sell it (or give it away)",
+            "points": 20
+        },
+        {
+            "name": "The pen is mightier than the sword",
+            "description": "Write a poem about anything you like",
+            "points": 10
+        },
+        {
+            "name": "A picture is worth a thousand words",
+            "description": "Take a photo of something that makes you happy",
+            "points": 10
+        },
+        {
+            "name": "You can do it, I believe in you",
+            "description": "Learn how to play a new instrument",
+            "points": 15
+        }, 
+        {
+            "name": "The next Shakespeare",
+            "description": "Write a short play and perform it with friends",
+            "points": 20
+        },
+        {
+            "name": "The next Spielberg",
+            "description": "Make a short film or video about anything you like",
+            "points": 20
         }
     ],
     "activities": [
@@ -906,6 +1026,20 @@
             "name": "8 ball",
             "description": "Play a game of pool",
             "points": 15
+        },
+        {
+            "name": "The final frontier",
+            "description": "Visit a space centre or observatory",
+            "points": 15
+        }, 
+        {
+            "name": "The best kind of therapy",
+            "description": "Spend an afternoon at a pet café (cat, dog, rabbit, etc.)",
+            "points": 10
+        }, {
+            "name": "a new universe?",
+            "description": "See a film at a cinema",
+            "points": 10
         }
     ]
 }
