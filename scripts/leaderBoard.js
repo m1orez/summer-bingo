@@ -58,5 +58,4 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-// Load leaderboard entries
 loadLeaderboard();

@@ -13,88 +13,121 @@ body {
   padding: 2rem 1rem;
   color: #333;
 }
-.proof-feed {
-    max-width: 600px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .proof-card {
-    border: 1px solid #ccc;
-    padding: 1rem;
-    border-radius: 8px;
-    background: white;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    position: relative;
-  }
-  .proof-info {
-    margin-bottom: 0.5rem;
-  }
-  .proof-actions {
-    display: flex;
-    gap: 1rem;
-  }
-  .vote-btn {
-    cursor: pointer;
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
-    border: none;
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: white;
-    user-select: none;
-    transition: background-color 0.3s ease;
-  }
-  .vote-btn.upvote {
-    background-color: #28a745;
-  }
-  .vote-btn.downvote {
-    background-color: #dc3545;
-  }
-  .vote-btn:disabled {
-    background-color: #aaa;
-    cursor: not-allowed;
-  }
 
 .proof-feed {
-    max-width: 700px;
-    margin: 2rem auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    }
-
-.proof-feed img{
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 1rem;
+  max-width: 700px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0 1rem;
 }
+
+.proof-card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.proof-info {
+  margin-bottom: 0.5rem;
+}
+
+.proof-feed img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.proof-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.vote-btn,
+.proof-actions button.thumbs-up,
+.proof-actions button.thumbs-down {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.vote-btn {
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+}
+
+.vote-btn.upvote {
+  background-color: #28a745;
+}
+
+.vote-btn.downvote {
+  background-color: #dc3545;
+}
+
+.vote-btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.proof-actions button.thumbs-up,
+.proof-actions button.thumbs-down {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .proof-actions button.thumbs-up {
-    background-color: green;
-    border-radius: 50%;
-    color: white;
-    border: none;
-    width: 36px;
-    height: 36px;
-    font-size: 20px;
-    cursor: pointer;
+  background-color: green;
+}
+
+.proof-actions button.thumbs-down {
+  background-color: red;
+}
+
+.proof-actions button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 1rem 0.5rem;
   }
-  
+
+  .proof-card {
+    padding: 0.8rem;
+  }
+
+  .vote-btn {
+    font-size: 1rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .proof-actions {
+    gap: 0.5rem;
+    justify-content: space-between;
+  }
+
+  .proof-actions button.thumbs-up,
   .proof-actions button.thumbs-down {
-    background-color: red;
-    border-radius: 50%;
-    color: white;
-    border: none;
-    width: 36px;
-    height: 36px;
-    font-size: 20px;
-    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
   }
-  
-  .proof-actions button:disabled {
-    cursor: default;
-    opacity: 0.5;
-  }
-  
+}

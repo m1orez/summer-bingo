@@ -13,7 +13,6 @@ import { auth, db } from "./firebaseConfig.js";
 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
-    // Do NOT check emailVerified here — allow user to pick interests even if not verified
     
     const userRef = doc(db, "users", user.uid);
     const userSnap = await getDoc(userRef);

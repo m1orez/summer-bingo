@@ -184,7 +184,6 @@ async function handleVote(proof, vote) {
     }
 
     await updateDoc(proofOwnerRef, updateData);
-    alert("Vote recorded!");
     loadAndRenderProofs();
   } catch (err) {
     alert("Failed to record vote: " + err.message);
