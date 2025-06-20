@@ -1,8 +1,7 @@
 import { auth, db } from "./firebaseConfig";
 
-import { getAuth, onAuthStateChanged, User } from "firebase/auth";
-import { doc, getDoc, updateDoc, DocumentReference, DocumentData } from "firebase/firestore";
-import { initializeApp } from "firebase/app";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { doc, getDoc, DocumentReference, DocumentData } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 
 interface UserData extends DocumentData {

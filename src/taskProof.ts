@@ -8,7 +8,6 @@ import {
     getDoc,
     updateDoc,
     arrayUnion,
-    collection
 } from "firebase/firestore";
 
 const CLOUD_NAME = "dqlfuyrwg";

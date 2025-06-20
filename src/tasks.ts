@@ -4,7 +4,6 @@ import {
   onAuthStateChanged,
   User,
 } 
-// @ts-ignore
 from "firebase/auth";
 
 import {
@@ -245,7 +244,6 @@ function renderTasks(tasks: Task[], taskProof: TaskProof[]): void {
   });
 }
 
-// Assume this function exists somewhere in your codebase
 declare function showInterestPopup(): void;
 
 initTaskPage();

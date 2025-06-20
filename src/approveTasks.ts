@@ -1,4 +1,4 @@
-import {auth, db, app} from './firebaseConfig';
+import {auth, db } from './firebaseConfig';
 
 import {
   onAuthStateChanged,
