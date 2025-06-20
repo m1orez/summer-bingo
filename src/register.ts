@@ -1,8 +1,8 @@
-import { auth, db } from "./firebaseConfig.js";
+import { auth, db } from "./firebaseConfig";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+} from "firebase/auth";
 import {
   doc,
   setDoc,
@@ -10,21 +10,21 @@ import {
   query,
   where,
   getDocs
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+} from "firebase/firestore";
 
-const registerForm = document.getElementById("registerForm");
+const registerForm = document.getElementById("registerForm") as HTMLFormElement | null;
 
 window.addEventListener('load', () => {
-  const form = document.getElementById('loginForm');
-  if (form) form.reset();
+  const loginForm = document.getElementById('loginForm') as HTMLFormElement | null;
+  if (loginForm) loginForm.reset();
 });
 
-registerForm.addEventListener("submit", async (e) => {
+registerForm?.addEventListener("submit", async (e: Event) => {
   e.preventDefault();
 
-  const username = document.getElementById("username").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+  const username = (document.getElementById("username") as HTMLInputElement).value.trim();
+  const email = (document.getElementById("email") as HTMLInputElement).value.trim();
+  const password = (document.getElementById("password") as HTMLInputElement).value;
 
   try {
     const usersRef = collection(db, "users");
@@ -55,8 +55,8 @@ registerForm.addEventListener("submit", async (e) => {
     alert("Account created! A verification email has been sent. You can now pick your interests.");
     window.location.href = "pickInterests.html";
 
-  } catch (error) {
+  } catch (error: any) {
     console.error("Registration error:", error);
-    alert(error.message);
+    alert(error.message || "An error occurred during registration.");
   }
 });

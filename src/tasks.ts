@@ -1,29 +1,55 @@
+import { auth, db } from "./firebaseConfig.js";
+
 import {
-  getAuth,
   onAuthStateChanged,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  User,
+} 
+// @ts-ignore
+from "firebase/auth";
+
 import {
   doc,
   getDoc,
   updateDoc,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { auth, db } from "./firebaseConfig.js";
+  DocumentReference,
+  DocumentData,
+} 
+from "firebase/firestore";
 
-let currentTasks = [];
-let currentTaskProof = [];
+interface Task {
+  name: string;
+  description?: string;
+  points?: number;
+}
+
+interface TaskProof {
+  taskIndex: number;
+  approvedIndex: number;
+}
+
+interface UserData extends DocumentData {
+  interests?: string[];
+  tasksCompleted?: { taskName: string }[];
+  currentTasks?: Task[];
+  taskProof?: TaskProof[];
+}
+
+let currentTasks: Task[] = [];
+let currentTaskProof: TaskProof[] = [];
 
 const unlockTime = new Date("2025-06-10T01:30:00+02:00");
 
-function showCountdown() {
+function showCountdown(): void {
   const wrapper = document.querySelector(".tasks-wrapper");
   if (!wrapper) return;
 
   wrapper.innerHTML = "<div class='countdown'></div>";
   const countdownEl = document.querySelector(".countdown");
+  if (!countdownEl) return;
 
   function updateCountdown() {
     const now = new Date();
-    const diff = unlockTime - now;
+    const diff = unlockTime.getTime() - now.getTime();
 
     if (diff <= 0) {
       location.reload();
@@ -32,7 +58,9 @@ function showCountdown() {
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-      countdownEl.textContent = `Tasks unlock in ${hours}h ${minutes}m ${seconds}s`;
+      if (countdownEl) {
+        countdownEl.textContent = `Tasks unlock in ${hours}h ${minutes}m ${seconds}s`;
+      }
     }
   }
 
@@ -40,17 +68,26 @@ function showCountdown() {
   setInterval(updateCountdown, 1000);
 }
 
-function initTaskPage() {
+async function initTaskPage(): Promise<void> {
   const now = new Date();
   if (now >= unlockTime) {
-    onAuthStateChanged(auth, async (user) => {
+    onAuthStateChanged(auth, async (user: User | null) => {
       if (user) {
         if (!user.emailVerified) {
           alert("You must verify your email before playing.");
           return;
         }
 
-        const userRef = doc(db, "users", user.uid);
+        if (!db) {
+          console.error("Firestore db is not initialized");
+          return;
+        }
+        if (!user.uid) {
+          console.error("User UID is not available");
+          return;
+        }
+
+        const userRef: DocumentReference<UserData> = doc(db, "users", user.uid) as DocumentReference<UserData>;
         const userSnap = await getDoc(userRef);
 
         if (userSnap.exists()) {
@@ -58,35 +95,39 @@ function initTaskPage() {
 
           if (!userData.interests || userData.interests.length === 0) {
             showInterestPopup();
-          } else {
-            const allTasks = await fetchAllTasks();
-            const completedNames = new Set((userData.tasksCompleted || []).map(t => t.taskName));
-            const usedNames = new Set([...completedNames]);
+            return;
+          }
 
-            if (userData.currentTasks && userData.currentTasks.length > 0) {
-              currentTasks = userData.currentTasks;
+          const allTasks = await fetchAllTasks();
 
-              for (let i = 0; i < currentTasks.length; i++) {
-                const task = currentTasks[i];
-                if (completedNames.has(task.name)) {
-                  const replacement = await findReplacementTask(allTasks, userData.interests, usedNames);
-                  if (replacement) {
-                    currentTasks[i] = replacement;
-                    usedNames.add(replacement.name);
-                  }
-                } else {
-                  usedNames.add(task.name);
+          const completedNames = new Set(
+            (userData.tasksCompleted || []).map((t: { taskName: string }) => t.taskName)
+          );
+          const usedNames = new Set<string>([...completedNames] as string[]);
+
+          if (userData.currentTasks && userData.currentTasks.length > 0) {
+            currentTasks = userData.currentTasks;
+
+            for (let i = 0; i < currentTasks.length; i++) {
+              const task = currentTasks[i];
+              if (completedNames.has(task.name)) {
+                const replacement = await findReplacementTask(allTasks, userData.interests!, usedNames);
+                if (replacement) {
+                  currentTasks[i] = replacement;
+                  usedNames.add(replacement.name);
                 }
+              } else {
+                usedNames.add(task.name);
               }
-
-              await updateDoc(userRef, { currentTasks });
-            } else {
-              currentTasks = await generateAndSaveTasks(userRef, userData.interests);
             }
 
-            currentTaskProof = userData.taskProof || [];
-            renderTasks(currentTasks, currentTaskProof);
+            await updateDoc(userRef, { currentTasks });
+          } else {
+            currentTasks = await generateAndSaveTasks(userRef, userData.interests);
           }
+
+          currentTaskProof = userData.taskProof || [];
+          renderTasks(currentTasks, currentTaskProof);
         }
       } else {
         window.location.href = "../index.html";
@@ -97,13 +138,17 @@ function initTaskPage() {
   }
 }
 
-async function fetchAllTasks() {
+async function fetchAllTasks(): Promise<Record<string, Task[]>> {
   const response = await fetch("../tasks.json");
   return await response.json();
 }
 
-async function findReplacementTask(allTasks, interests, excludeSet) {
-  const pool = [];
+async function findReplacementTask(
+  allTasks: Record<string, Task[]>,
+  interests: string[],
+  excludeSet: Set<string>
+): Promise<Task | null> {
+  const pool: Task[] = [];
 
   for (const interest of interests) {
     const tasks = allTasks[interest] || [];
@@ -119,15 +164,22 @@ async function findReplacementTask(allTasks, interests, excludeSet) {
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
-async function generateAndSaveTasks(userRef, interests) {
+async function generateAndSaveTasks(
+  userRef: DocumentReference<UserData>,
+  interests: string[]
+): Promise<Task[]> {
   const allTasks = await fetchAllTasks();
   const selected = selectTasksFromInterests(allTasks, interests, 10);
   await updateDoc(userRef, { currentTasks: selected });
   return selected;
 }
 
-function selectTasksFromInterests(allTasks, interests, maxTasks = 10) {
-  let selectedTasks = [];
+function selectTasksFromInterests(
+  allTasks: Record<string, Task[]>,
+  interests: string[],
+  maxTasks = 10
+): Task[] {
+  let selectedTasks: Task[] = [];
 
   const shuffledInterestsTasks = interests.map((interest) => {
     const tasks = allTasks[interest] || [];
@@ -145,14 +197,14 @@ function selectTasksFromInterests(allTasks, interests, maxTasks = 10) {
   return selectedTasks;
 }
 
-function shuffleArray(array) {
+function shuffleArray<T>(array: T[]): T[] {
   return array
     .map((value) => ({ value, sort: Math.random() }))
     .sort((a, b) => a.sort - b.sort)
     .map(({ value }) => value);
 }
 
-function renderTasks(tasks, taskProof) {
+function renderTasks(tasks: Task[], taskProof: TaskProof[]): void {
   const wrapper = document.querySelector(".tasks-wrapper");
   if (!wrapper) return;
 
@@ -192,5 +244,8 @@ function renderTasks(tasks, taskProof) {
     wrapper.appendChild(container);
   });
 }
+
+// Assume this function exists somewhere in your codebase
+declare function showInterestPopup(): void;
 
 initTaskPage();
